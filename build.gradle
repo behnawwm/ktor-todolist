@@ -44,5 +44,9 @@ task fatJar(type: Jar) {
     from { configurations.runtimeClasspath.collect { it.isDirectory() ? it : zipTree(it) } }
     with jar
 }
-task stage(dependsOn: ['build', 'clean'])
-build.mustRunAfter clean
+
+task stage {
+    dependsOn installDist
+}
+
+//build.mustRunAfter clean
