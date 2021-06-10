@@ -37,3 +37,10 @@ dependencies {
     implementation group: 'io.ktor', name: 'ktor-gson', version: ktor_version
 
 }
+task fatJar(type: Jar) {
+    manifest {
+        attributes 'Main-Class': mainClassName
+    }
+    from { configurations.runtimeClasspath.collect { it.isDirectory() ? it : zipTree(it) } }
+    with jar
+}
